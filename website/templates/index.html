@@ -1,31 +1,33 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-        <link href="/static/base.css" rel="stylesheet"/>
-        <!-- <link href="https://fonts.googleapis.com/css?family=Oswald|Raleway" rel="stylesheet"> -->
-        <link href="https://fonts.googleapis.com/css?family=Oswald:300|Raleway:300" rel="stylesheet">
-    </head>
-    <body>
-        <div class="header">
-            <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-                <a class="pure-menu-heading" href=""> Beautiful Dashboard </a>
+{% extends "base.html" %}
 
-                <ul class="pure-menu-list">
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Logout</a></li>
-                </ul>
+{% block content %}
+<div class="pure-g">
+    <div class="animated fadeInUp pure-u-1 pure-u-md-1-2 pure-u-lg-1-3">
+        <div class="l-box graph-box">
+            <h3>Graph 1</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+            </p>
+        </div>
+    </div>
 
-                <div class="sub-menu pure-menu pure-menu-horizontal">
-                    <ul class="pure-menu-list">
-                        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Analytics</a></li>
-                        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Recommend</a></li>
-                        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Inventory</a></li>
-                    </ul>
-                </div>
-            </div>
+    <div class="animated fadeInUp pure-u-1 pure-u-md-1-2 pure-u-lg-1-3">
+        <div class="l-box graph-box">
+            <h3>Graph 2</h3>
+            <p>
+                Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.
+            </p>
         </div>
-        
-        <div class="content">
-            {% block content %}{% endblock %}
+    </div>
+
+    <div class="animated fadeInUp pure-u-1 pure-u-md-1-2 pure-u-lg-1-3">
+        <div class="l-box graph-box">
+            <h3>Graph 3</h3>
+            <p>
+                In culpa qui officia deserunt mollit anim id est laborum. incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+            </p>
         </div>
-    </body>
-</html>
+    </div>
+
+</div>
+{% endblock %}
