@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+        <link href="/static/base.css" rel="stylesheet"/>
+        <!-- <link href="https://fonts.googleapis.com/css?family=Oswald|Raleway" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css?family=Oswald:300|Raleway:300" rel="stylesheet">
+    </head>
+    <body>
+        <div class="header">
+            <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+                <a class="pure-menu-heading" href=""> Beautiful Dashboard </a>
+
+                <ul class="pure-menu-list">
+                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Logout</a></li>
+                </ul>
+
+                <div class="sub-menu pure-menu pure-menu-horizontal">
+                    <ul class="pure-menu-list">
+                        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Analytics</a></li>
+                        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Recommend</a></li>
+                        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Inventory</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
