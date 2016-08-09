@@ -51,8 +51,8 @@ label {
 .graph-box {
     background-color: rgb(248, 248, 248);
     border-radius: 0.25em;
+    animation-duration: 0.5s !important;
 }
-
 
 
 /*
