@@ -1,23 +1,20 @@
+# _Inventory Prediciton_
+
 ## Synopsis
 
-At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
+This project explores the well know problem of **time series**. I tested out different models from sarima models to LSTM neural networks for inventory prediction.
 
-## Code Example
+The code includes some exploration analysis, trend analysis and finally some models in ipython notebooks. These models were then rewriten into python script and built in the web app.
 
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
+The purpose of the web app is to provide some insight on the data, give recommendations by introducing product names and getting recommended products based on the ones commonly bought together.
+
+Finally it also provides predicition for items in the inventory giving you a glimpse about what the rate of consumption will be in the following weeks.
+
+## Libraries used
+
+Will be added soon...
 
 ## Motivation
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+Will be added soon...
 
-## Installation
-
-Provide code examples and explanations of how to get the project.
-
-## API Reference
-
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
-
-## License
-
-A short snippet describing the license (MIT, Apache, etc.)
