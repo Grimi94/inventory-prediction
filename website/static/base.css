@@ -153,11 +153,6 @@ a.pure-button-primary {
  * This is the blue top section that appears on the page.
  */
 
-.content {
-    margin-top: 7em;
-    margin-left: 3em;
-    margin-right: 3em;
-}
 
 .splash-container {
     background: #1f8dd6;
@@ -205,6 +200,13 @@ a.pure-button-primary {
  * -- CONTENT STYLES --
  * This represents the content area (everything below the blue section)
  */
+
+.content {
+    margin-top: 7em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+}
+
 .content-wrapper {
     /* These styles are required for the "scroll-over" effect */
     position: absolute;
@@ -233,9 +235,58 @@ a.pure-button-primary {
 .content-subhead {
     color: #1f8dd6;
 }
-    .content-subhead i {
-        margin-right: 7px;
-    }
+
+.content-subhead i {
+    margin-right: 7px;
+}
+
+.search-bar {
+    margin: 0 auto;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+    display: table;
+}
+
+.search-bar input#search {
+    width: 100%;
+    height: 3.1em;
+    background: #ffffff;
+    border: none;
+    font-size: 15pt;
+    float: left;
+    color: #63717f;
+    outline: none;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-bottom-right-radius: 5px;
+    -moz-border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.search-bar .icon{
+    background: #ffffff;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    white-space: nowrap;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 4px 5px;
+    font-size: 1.2em;
+    font-weight: normal;
+    line-height: 1;
+    color: #63717f;
+    text-align: center;
+}
+
+.time-series {
+    background-color: #ffffff;
+    margin: 0 auto;
+    margin-top:30px;
+    border-radius: 5px;
+    padding: 1.5em;
+}
 
 /* This is the class used for the dark-background areas. */
 .ribbon {
