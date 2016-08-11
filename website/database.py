@@ -1,4 +1,5 @@
 import pandas as pd
+
 def read_data(path):
     df = pd.read_csv(path, parse_dates=['FECHA'], infer_datetime_format=True)
     df['CPRECIO'] = df[' CPRECIO '].map(lambda x: x.strip().replace(",", ""))
