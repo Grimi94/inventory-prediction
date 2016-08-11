@@ -1,8 +1,4 @@
 {% extends "base.html" %}
-{% block head %}
-    {{ super() }}
-{% endblock %}
-
 {% block content %}
 <div class=" pure-g">
     <!-- Search bar -->
@@ -12,46 +8,76 @@
     </div>
 
     <!-- Results -->
-    <div class="time-series pure-u-5-6 pure-u-lg-5-6" id="chart"> </div>
+    <div id="container" class="time-series pure-u-5-6 pure-u-lg-2-3"></div>
 </div>
+{% endblock %}
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.12/d3.min.js"></script>
-<script type="text/javascript" src="/static/d3_timeseries.js"></script>
-<link href="/static/d3_timeseries.css" type="text/css" rel="stylesheet"/>
+{% block footer %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script>
- var data = createRandomData(80,[0,1000],0.01)
- var chart2 = d3.timeseries()
-                .addSerie(data.slice(0,60),{x:'date',y:'n'},{interpolate:'linear',color:"#a6cee3",label:"value"})
-                .addSerie(data.slice(50),
-                          {x:'date',y:'n3',ci_up:'ci_up',ci_down:'ci_down'},
-                          {interpolate:'monotone',dashed:true,color:"#a6cee3",label:"prediction"})
-                .width(900)
+ $(function () {
+     $.getJSON('http://127.0.0.1:5000/forecast/25967', function (data) {
+         $('#container').highcharts({
+             chart: {
+                 zoomType: 'x'
+             },
+             title: {
+                 text: 'Product: 234589  ' + data.description
+             },
+             subtitle: {
+                 text: document.ontouchstart === undefined ?
+                       'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+             },
+             xAxis: {
+                 type: 'datetime'
+             },
+             yAxis: {
+                 title: {
+                     text: 'Average demand rate'
+                 }
+             },
+             legend: {
+                 enabled: false
+             },
+             plotOptions: {
+                 area: {
+                     fillColor: {
+                         linearGradient: {
+                             x1: 0,
+                             y1: 0,
+                             x2: 0,
+                             y2: 1
+                         },
+                         stops: [
+                             [0, Highcharts.getOptions().colors[0]],
+                             [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                         ]
+                     },
+                     marker: {
+                         radius: 2
+                     },
+                     lineWidth: 1,
+                     states: {
+                         hover: {
+                             lineWidth: 1
+                         }
+                     },
+                     threshold: null
+                 }
+             },
 
- chart2('#chart')
-
- function createRandomData(n,range,rand) {
-     if(range == null) range = [0,100];
-     if(rand == null) rand=1/20;
-
-     var num = range[0] + Math.floor(Math.random()*(range[1]-range[0]));
-     var num2 = range[0] + Math.floor(Math.random()*(range[1]-range[0]));
-     var num3 = num;
-     var d= new Date('2013-01-01');
-     var data = [];
-     var rgen = d3.random.normal(0,(range[1]-range[0])*rand);
-     for (var i = 0; i<n; i++){
-             data.push({date:d,n:num,n2:num2,n3:num3,
-                        ci_up:num3*1.05,ci_down:num3*0.95
-             });
-             d = new Date(d.getTime() + 1000*60*60*24);
-             num = num+rgen();
-             num3 = num+rgen()/3;
-             num = Math.min(Math.max(num,range[0]),range[1]);
-             num2 = num2+rgen();
-             num2 = Math.min(Math.max(num2,range[0]),range[1]);
-     }
-     return data;
- }
-
+             series: [{
+                 type: 'area',
+                 name: 'Average rate',
+                 data: data.history
+             }, {
+                 type: 'area',
+                 name: 'Predicted Average rate',
+                 data: data.prediction
+             }]
+         });
+     });
+ });
 </script>
 {% endblock %}
