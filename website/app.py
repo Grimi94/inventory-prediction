@@ -12,7 +12,7 @@ db = DB.load_data("../BASEVENTAS2010A2015.csv")
 model = Model(db)
 
 
-# Normal analytics graphs
+# Simple analytics graphs
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -29,16 +29,20 @@ def recommend():
 @app.route("/forecast/<product_id>")
 def forecast(product_id):
     if product_id:
-        a, b = model.predict_product(product_id)
-        a = a.reset_index()
-        b = b.reset_index()
+        res, pred, conf = model.predict_product(product_id)
+        res = res.reset_index()
+        pred = pred.reset_index()
+        conf = conf.reset_index()
 
-        a['FECHA'] = a['FECHA'].astype(np.int64) / 1e6
-        b['index'] = b['index'].astype(np.int64) / 1e6
+        # Transform Timestamp into unix time
+        res['FECHA'] = res['FECHA'].astype(np.int64) / 1e6
+        pred['index'] = pred['index'].astype(np.int64) / 1e6
+        conf['index'] = conf['index'].astype(np.int64) / 1e6
 
         results = {}
-        results["history"] = a.values.tolist()
-        results["prediction"] = b.values.tolist()
+        results["history"] = res.values.tolist()
+        results["prediction"] = pred.values.tolist()
+        results["confidence"] = conf.values.tolist()
         results["description"] = "description"
 
         return simplejson.dumps(results, ignore_nan=True)
