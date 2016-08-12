@@ -8,22 +8,33 @@
     </div>
 
     <!-- Results -->
-    <div id="container" class="time-series pure-u-5-6 pure-u-lg-2-3"></div>
+    <div id="container" class="time-series pure-u-5-6 pure-u-lg-4-6"></div>
 </div>
 {% endblock %}
 
 {% block footer %}
 <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script>
- $(function () {
-     $.getJSON('http://127.0.0.1:5000/forecast/25967', function (data) {
+ $('document').ready(function(){
+     $('#search').keypress(function(e){
+         if(e.which == 13){//Enter key pressed
+             console.log();
+             loadGraph($('#search').val());
+         }
+     });
+ });
+
+ //25967
+ var loadGraph = function (product_id) {
+     $.getJSON('/forecast/' + product_id, function (data) {
          $('#container').highcharts({
              chart: {
-                 zoomType: 'x'
+                 zoomType: 'x',
              },
              title: {
-                 text: 'Product: 234589  ' + data.description
+                 text: 'Product: ' + product_id + " " +  data.description
              },
              subtitle: {
                  text: document.ontouchstart === undefined ?
@@ -35,12 +46,19 @@
              yAxis: {
                  title: {
                      text: 'Average demand rate'
-                 }
+                 },
+                 min: 0
              },
              legend: {
                  enabled: false
              },
              plotOptions: {
+                 line:{
+                     marker: {
+                         radius: 1
+                     },
+                     lineWidth: 1,
+                 },
                  area: {
                      fillColor: {
                          linearGradient: {
@@ -55,7 +73,7 @@
                          ]
                      },
                      marker: {
-                         radius: 2
+                         radius: 1
                      },
                      lineWidth: 1,
                      states: {
@@ -68,16 +86,22 @@
              },
 
              series: [{
-                 type: 'area',
                  name: 'Average rate',
                  data: data.history
              }, {
-                 type: 'area',
                  name: 'Predicted Average rate',
-                 data: data.prediction
+                 data: data.prediction,
+                 zIndex: 1
+             }, {
+                 type: 'arearange',
+                 name: 'Confidence Interval',
+                 data: data.confidence,
+                 zIndex: 0,
+                 color: Highcharts.getOptions().colors[0],
+                 fillOpacity: 0.3,
              }]
          });
      });
- });
+ }
 </script>
 {% endblock %}
