@@ -265,6 +265,14 @@ a.pure-button-primary {
     border-top-right-radius: 5px;
 }
 
+.suggestion {
+    margin: 0px auto;
+    font-style: italic;
+    font-size: 0.7em;
+    font-weight: 200;
+    padding-left: 0.5em;
+}
+
 .search-bar .icon{
     background: #ffffff;
     border-bottom-left-radius: 5px;

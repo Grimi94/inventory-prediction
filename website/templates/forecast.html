@@ -2,13 +2,18 @@
 {% block content %}
 <div class=" pure-g">
     <!-- Search bar -->
-    <div class="search-bar pure-u-5-6 pure-u-lg-2-3">
+    <div id="searchbar" class="search-bar pure-u-5-6 pure-u-lg-2-3">
         <span class="icon"><i class="fa fa-search"></i></span>
         <input type="search" id="search" placeholder="Search product id" />
     </div>
+    <div class="suggestion pure-u-5-6 pure-u-lg-2-3">
+        <span>
+            Search Suggestions: 70883, 25967, 28590, 26034, 62382
+        </span>
+    </div>
 
     <!-- Results -->
-    <div id="container" class="time-series pure-u-5-6 pure-u-lg-4-6"></div>
+    <div id="container" class=" pure-u-5-6 pure-u-lg-4-6"></div>
 </div>
 {% endblock %}
 
@@ -17,6 +22,9 @@
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script>
+
+ window.firstSearch = true;
+
  $('document').ready(function(){
      $('#search').keypress(function(e){
          if(e.which == 13){//Enter key pressed
@@ -29,12 +37,17 @@
  //25967
  var loadGraph = function (product_id) {
      $.getJSON('/forecast/' + product_id, function (data) {
+         if(window.firstSearch) {
+             window.fisrtSearch = false;
+             $('#container').addClass('animated fadeIn time-series');
+             console.log("here");
+         }
          $('#container').highcharts({
              chart: {
                  zoomType: 'x',
              },
              title: {
-                 text: 'Product: ' + product_id + " " +  data.description
+                 text: 'Product: ' + product_id + " " 
              },
              subtitle: {
                  text: document.ontouchstart === undefined ?
