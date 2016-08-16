@@ -11,23 +11,28 @@ app = Flask(__name__)
 db = DB.load_data("../BASEVENTAS2010A2015.csv")
 model = Model(db)
 
-
-# Simple analytics graphs
 @app.route("/")
 def home():
+    """
+    Simple analytics graphs
+    """
     return render_template("index.html")
 
 
-# Recommend products based on other products
 @app.route("/recommend")
 def recommend():
+    """
+    Recommend products based on other products
+    """
     return render_template("recommend.html")
 
 
-# Recommend products based on other products
 @app.route("/forecast", defaults={'product_id': None})
 @app.route("/forecast/<product_id>")
 def forecast(product_id):
+    """
+    Forecasts a product and sends back the information as json
+    """
     if product_id:
         res, pred, conf = model.predict_product(product_id)
         res = res.reset_index()
@@ -39,6 +44,7 @@ def forecast(product_id):
         pred['index'] = pred['index'].astype(np.int64) / 1e6
         conf['index'] = conf['index'].astype(np.int64) / 1e6
 
+        # Prepare results dictionary
         results = {}
         results["history"] = res.values.tolist()
         results["prediction"] = pred.values.tolist()
