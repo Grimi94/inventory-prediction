@@ -39,3 +39,7 @@ There is still a lot of room for improvement. For example making more transforma
 that had the best results was the log function, but there are many ways to stationarize and it could be worthwhile to explore more. The recommendation engine
 can be expanded into a product to product recommendation using nlp over the product features and descriptions to find similar products, this is useful
 when you run out of stock or if a company wants to find a similar product but from another brand.
+
+## Screenshots
+
+![alt tag](/screenshot.png)
